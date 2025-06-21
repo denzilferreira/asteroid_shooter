@@ -20,6 +20,17 @@ PLAYER_ACCELERATION = 0.4
 PLAYER_FRICTION = -0.04
 PLAYER_TURN_SPEED = 4.5
 
+# --- Star Field ---
+NUM_STARS = 120
+star_field = [
+    (
+        random.randint(0, SCREEN_WIDTH),
+        random.randint(0, SCREEN_HEIGHT),
+        random.randint(80, 255)  # brightness
+    )
+    for _ in range(NUM_STARS)
+]
+
 # --- Asset Loader ---
 def load_image(filename, scale_x, scale_y):
     """Loads, scales, and handles errors for an image."""
@@ -56,19 +67,37 @@ class Player(pygame.sprite.Sprite):
         self.laser_count = 1
         self.max_lasers = 5  # Optional: limit max lasers
 
-    def update(self):
+    def update(self, gamepad=None):
         self.acc = pygame.math.Vector2(0, 0)
         keys = pygame.key.get_pressed()
+        used_gamepad = False
 
-        if keys[self.controls['left']]:
-            self.angle += PLAYER_TURN_SPEED
-        if keys[self.controls['right']]:
-            self.angle -= PLAYER_TURN_SPEED
-        if keys[self.controls['up']]:
-            # Accelerate in the direction the ship is facing
-            self.acc = pygame.math.Vector2(0, -PLAYER_ACCELERATION).rotate(-self.angle)
-        if keys[self.controls['fire']]:
-            self.shoot()
+        # --- Gamepad controls ---
+        if gamepad:
+            axis_x = gamepad.get_axis(0)
+            axis_y = gamepad.get_axis(1)
+            # Deadzone
+            if abs(axis_x) > 0.15:
+                self.angle -= axis_x * PLAYER_TURN_SPEED * 1.5
+                used_gamepad = True
+            if abs(axis_y) > 0.15:
+                self.acc = pygame.math.Vector2(0, -PLAYER_ACCELERATION * -axis_y).rotate(-self.angle)
+                used_gamepad = True
+            # A button (usually 0)
+            if gamepad.get_button(0):
+                self.shoot()
+                used_gamepad = True
+
+        # --- Keyboard fallback ---
+        if not used_gamepad:
+            if keys[self.controls['left']]:
+                self.angle += PLAYER_TURN_SPEED
+            if keys[self.controls['right']]:
+                self.angle -= PLAYER_TURN_SPEED
+            if keys[self.controls['up']]:
+                self.acc = pygame.math.Vector2(0, -PLAYER_ACCELERATION).rotate(-self.angle)
+            if keys[self.controls['fire']]:
+                self.shoot()
 
         # Apply friction & update motion
         self.acc += self.vel * PLAYER_FRICTION
@@ -243,9 +272,88 @@ def show_start_screen():
             if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
                 waiting = False
 
+def show_difficulty_screen():
+    """Displays the difficulty selection screen."""
+    screen.fill(BLACK)
+    draw_text(screen, "SELECT DIFFICULTY", 64, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 4, WHITE)
+    draw_text(screen, "Press 1 for EASY", 32, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 - 40, GREEN)
+    draw_text(screen, "Press 2 for MEDIUM", 32, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, ORANGE)
+    draw_text(screen, "Press 3 for HARD", 32, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 + 40, RED)
+    pygame.display.flip()
+
+    waiting = True
+    difficulty = None
+    while waiting:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_1:
+                    difficulty = "easy"
+                    waiting = False
+                elif event.key == pygame.K_2:
+                    difficulty = "medium"
+                    waiting = False
+                elif event.key == pygame.K_3:
+                    difficulty = "hard"
+                    waiting = False
+    return difficulty
+
+def show_replay_screen(winner):
+    """Displays the replay screen."""
+    screen.fill(BLACK)
+    if winner:
+        draw_text(screen, f"{winner} WINS!", 64, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 4, WHITE)
+    else:
+        draw_text(screen, "GAME OVER!", 64, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 4, WHITE)
+    draw_text(screen, "Press SPACE to replay", 32, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, GREEN)
+    draw_text(screen, "Press ESC to quit", 32, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 + 40, RED)
+    pygame.display.flip()
+
+    waiting = True
+    while waiting:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_SPACE:
+                    waiting = False
+                    return True  # Replay
+                elif event.key == pygame.K_ESCAPE:
+                    pygame.quit()
+                    sys.exit()
+    return False
+
+def reset_game():
+    """Resets the game state for replay."""
+    global all_sprites, players, asteroids, projectiles, powerups
+    all_sprites.empty()
+    players.empty()
+    asteroids.empty()
+    projectiles.empty()
+    powerups.empty()
+
+    # Recreate players
+    player1.reset()
+    player2.reset()
+    all_sprites.add(player1, player2)
+    players.add(player1, player2)
+
+    # Spawn asteroids based on difficulty
+    for _ in range(num_asteroids):
+        spawn_asteroid()
+
 # --- Initialization ---
 pygame.init()
 pygame.mixer.init()
+
+pygame.joystick.init()
+gamepads = [pygame.joystick.Joystick(i) for i in range(pygame.joystick.get_count())]
+for pad in gamepads:
+    pad.init()
+
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 pygame.display.set_caption("Asteroid Shooter")
 clock = pygame.time.Clock()
@@ -262,6 +370,7 @@ asteroid_img = load_image("asteroid.png", 40, 40)
 # Load sounds
 laser_sound = pygame.mixer.Sound("laser.wav")
 explosion_sound = pygame.mixer.Sound("explosion.wav")
+powerup_sound = pygame.mixer.Sound("powerup.wav")
 
 # Create sprite groups
 all_sprites = pygame.sprite.Group()
@@ -283,11 +392,23 @@ player2 = Player(player2_start_pos[0], player2_start_pos[1], player2_img, player
 all_sprites.add(player1, player2)
 players.add(player1, player2)
 
-# Spawn initial asteroids
-for _ in range(10):
-    spawn_asteroid()
-
+# Show the start screen
 show_start_screen()
+
+# Show difficulty selection screen
+# --- Difficulty Settings ---
+difficulty_settings = {
+    "easy": 5,    # Number of asteroids
+    "medium": 10,
+    "hard": 15
+}
+difficulty = show_difficulty_screen()
+if difficulty is None:
+    print("No difficulty selected. Default to easy.")
+    difficulty = "easy"
+num_asteroids = difficulty_settings[difficulty]
+for _ in range(num_asteroids):
+    spawn_asteroid()
 
 # --- Game Loop ---
 running = True
@@ -301,12 +422,44 @@ seconds_left = GAME_DURATION_SECONDS  # Initialize to avoid unbound error
 while running:
     clock.tick(FPS)
 
+    # Check if the game is over
+    if game_over:
+        replay = show_replay_screen(winner)
+        if replay:
+            difficulty = show_difficulty_screen()
+            if difficulty is None:
+                print("No difficulty selected. Default to easy.")
+                difficulty = "easy"
+            num_asteroids = difficulty_settings[difficulty]
+            reset_game()
+            game_over = False
+            winner = None
+            start_ticks = pygame.time.get_ticks()
+            last_powerup = pygame.time.get_ticks()
+            seconds_left = GAME_DURATION_SECONDS
+        continue
+
     for event in pygame.event.get():
         if event.type == pygame.QUIT or (event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE):
             running = False
 
     # --- Update ---
     if not game_over:
+        # Pass gamepad to each player if available
+        if len(gamepads) >= 2:
+            player1.update(gamepad=gamepads[0])
+            player2.update(gamepad=gamepads[1])
+        elif len(gamepads) == 1:
+            player1.update(gamepad=gamepads[0])
+            player2.update()
+        else:
+            player1.update()
+            player2.update()
+        # Update other sprites
+        for sprite in all_sprites:
+            if not isinstance(sprite, Player):
+                sprite.update()
+
         all_sprites.update()
 
         now = pygame.time.get_ticks()
@@ -319,6 +472,7 @@ while running:
             hits = pygame.sprite.spritecollide(player, powerups, True)
             for _ in hits:
                 if player.laser_count < player.max_lasers:
+                    powerup_sound.play()
                     player.laser_count += 1
 
         # Check timer
@@ -369,6 +523,14 @@ while running:
                 explosion_sound.play()
                 player.laser_count = 1  # Reset laser count
                 player.reset()
+                # --- Gamepad rumble ---
+                # Find which gamepad is assigned to this player
+                player_idx = 0 if player == player1 else 1
+                if len(gamepads) > player_idx:
+                    try:
+                        gamepads[player_idx].rumble(0.8, 0.8, 400)  # strong, weak, duration(ms)
+                    except Exception as e:
+                        print("Rumble not supported:", e)
                 # Explode and respawn each asteroid that hit the player
                 for asteroid in collided_asteroids:
                     expl = Explosion(asteroid.rect.center)
@@ -388,6 +550,10 @@ while running:
 
     # --- Drawing ---
     screen.fill(BLACK)
+    # Draw star field
+    for x, y, brightness in star_field:
+        screen.set_at((x, y), (brightness, brightness, brightness))
+
     all_sprites.draw(screen)
 
     # Draw UI (fixed position)
