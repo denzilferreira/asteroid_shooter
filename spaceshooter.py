@@ -32,10 +32,12 @@ star_field = [
 ]
 
 # --- Asset Loader ---
-def load_image(filename, scale_x, scale_y):
+def load_image(filename, scale_x, scale_y, crop_rect=None):
     """Loads, scales, and handles errors for an image."""
     try:
         image = pygame.image.load(filename).convert_alpha()
+        if crop_rect:
+            image = image.subsurface(pygame.Rect(crop_rect))
         image = pygame.transform.scale(image, (scale_x, scale_y))
         return image
     except pygame.error as e:
@@ -96,6 +98,8 @@ class Player(pygame.sprite.Sprite):
                 self.angle -= PLAYER_TURN_SPEED
             if keys[self.controls['up']]:
                 self.acc = pygame.math.Vector2(0, -PLAYER_ACCELERATION).rotate(-self.angle)
+            if keys[self.controls['down']]:
+                self.acc = pygame.math.Vector2(0, PLAYER_ACCELERATION).rotate(-self.angle)
             if keys[self.controls['fire']]:
                 self.shoot()
 
@@ -363,8 +367,8 @@ pygame.mixer.music.set_volume(0.2)
 pygame.mixer.music.play(-1)
 
 # Load assets
-player1_img = load_image("player1.png", 50, 40)
-player2_img = load_image("player2.png", 50, 40)
+player1_img = load_image("player1.png", 40, 35, crop_rect=(256, 256, 640, 640))
+player2_img = load_image("player2.png", 40, 35, crop_rect=(256, 256, 640, 640))
 asteroid_img = load_image("asteroid.png", 40, 40)
 
 # Load sounds
@@ -380,8 +384,8 @@ projectiles = pygame.sprite.Group()
 powerups = pygame.sprite.Group()
 
 # Create players
-player1_controls = {'up': pygame.K_w, 'left': pygame.K_a, 'right': pygame.K_d, 'fire': pygame.K_f}
-player2_controls = {'up': pygame.K_UP, 'left': pygame.K_LEFT, 'right': pygame.K_RIGHT, 'fire': pygame.K_RSHIFT}
+player1_controls = {'up': pygame.K_w, 'down': pygame.K_s, 'left': pygame.K_a, 'right': pygame.K_d, 'fire': pygame.K_f}
+player2_controls = {'up': pygame.K_UP, 'down': pygame.K_DOWN, 'left': pygame.K_LEFT, 'right': pygame.K_RIGHT, 'fire': pygame.K_RSHIFT}
 
 player1_start_pos = (SCREEN_WIDTH / 4, SCREEN_HEIGHT / 2)
 player2_start_pos = (SCREEN_WIDTH * 3 / 4, SCREEN_HEIGHT / 2)
