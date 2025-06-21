@@ -521,7 +521,8 @@ while running:
                 big_expl = Explosion(player.rect.center, size=120)
                 all_sprites.add(big_expl)
                 explosion_sound.play()
-                player.laser_count = 1  # Reset laser count
+                if difficulty != "easy":
+                    player.laser_count = 1  # Reset laser count
                 player.reset()
                 # --- Gamepad rumble ---
                 # Find which gamepad is assigned to this player
