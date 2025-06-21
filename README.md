@@ -1,6 +1,10 @@
 # Asteroid Shooter
 A quick, vibe-coded Python arcade game built with Pygame. Created in just 20 minutes using GPT-4.1 for code generation and [bfxr.net](https://www.bfxr.net/) for retro sound effects.
 
+## Changelog
+- v2: gamepad+rumble support, powerup sound effect, starfield background, replay, difficulty level picking
+- v1: initial release
+
 ## Preview
 v2
 ![v2](demo/demo-v2.gif)
