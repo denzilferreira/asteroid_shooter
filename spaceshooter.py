@@ -480,9 +480,9 @@ while running:
         if seconds_left <= 0:
             game_over = True
             if player1.score > player2.score:
-                winner = "Player 1"
+                winner = "Player 1 WINS!"
             elif player2.score > player1.score:
-                winner = "Player 2"
+                winner = "Player 2 WINS!"
             else:
                 winner = "It's a TIE!"
 
@@ -564,7 +564,7 @@ while running:
     if not game_over:
         draw_text(screen, f"Time: {int(seconds_left)}", 22, SCREEN_WIDTH / 2, 20, WHITE)
     else:
-        draw_text(screen, f"{winner} WINS!", 64, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 - 50, GREEN)
+        draw_text(screen, f"{winner}", 64, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 - 50, GREEN)
         draw_text(screen, "Press ESC to quit", 22, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 + 50, WHITE)
 
     pygame.display.flip()
