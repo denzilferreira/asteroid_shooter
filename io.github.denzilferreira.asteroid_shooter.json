@@ -1,5 +1,5 @@
 {
-  "app-id": "io.github.denzilferreira.asteroidshooter",
+  "app-id": "io.github.denzilferreira.asteroid_shooter",
   "runtime": "org.freedesktop.Platform",
   "runtime-version": "24.08",
   "sdk": "org.freedesktop.Sdk",
@@ -10,8 +10,9 @@
     "--socket=wayland",
     "--device=dri",
     "--filesystem=home",
-    "--device=input",
-    "--socket=pulseaudio"
+    "--device=all",
+    "--socket=pulseaudio",
+    "--share=ipc"
   ],
   "modules": [
     {
