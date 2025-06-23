@@ -4,10 +4,18 @@
   
   <name>Asteroid Shooter</name>
   <summary>A 2-player time-bound survival asteroid shooter.</summary>
-  
+  <developer id="com.denzilferreira">
+    <name>Denzil Ferreira</name>
+  </developer>
+
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>Apache-2.0</project_license>
-  
+  <content_rating type="oars-1.1" />
+
+  <url type="homepage">https://denzilferreira.com/</url>
+  <url type="bugtracker">https://github.com/denzilferreira/asteroid_shooter/issues</url>
+  <url type="vcs-browser">https://github.com/denzilferreira/asteroid_shooter</url>
+
   <supports>
     <control>gamepad</control>
   </supports>
@@ -27,4 +35,18 @@
       <image>https://github.com/denzilferreira/asteroid_shooter/blob/a5921634c456b4fef8b754e252efd30fc38ac4bf/screenshots/asteroid_shooter_2.png?raw=true</image>
     </screenshot>
   </screenshots>
+  <releases>
+    <release version="1.0.0" date="2025-06-23">
+      <url type="details">https://github.com/denzilferreira/asteroid_shooter/releases/tag/v1.0.0</url>
+      <description>
+        <p>Release description</p>
+          <ul>
+            <li>Support gamepad</li>
+            <li>Powerup sound effect</li>
+            <li>Allow user to replay after round</li>
+            <li>Set difficulty level</li>
+          </ul>
+      </description>
+    </release>
+  </releases>
 </component>
