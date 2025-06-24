@@ -13,7 +13,7 @@
   <content_rating type="oars-1.1" />
 
   <icon type="stock">io.github.denzilferreira.asteroid_shooter</icon>
-  <icon type="remote" height="256" width="256">https://github.com/denzilferreira/asteroid_shooter/blob/b06956f593e73777231b0e959ccbc8f1cd1b57cd/launcher/io.github.denzilferreira.asteroid_shooter.png</icon>
+  <icon type="remote" height="256" width="256">https://github.com/denzilferreira/asteroid_shooter/blob/v1.0.0/io.github.denzilferreira.asteroid_shooter.png?raw=true</icon>
   
   <url type="homepage">https://denzilferreira.com/</url>
   <url type="bugtracker">https://github.com/denzilferreira/asteroid_shooter/issues</url>
@@ -36,14 +36,14 @@
   <launchable type="desktop-id">io.github.denzilferreira.android_shooter.desktop</launchable>
   <screenshots>
     <screenshot type="default">
-      <image>https://github.com/denzilferreira/asteroid_shooter/blob/a5921634c456b4fef8b754e252efd30fc38ac4bf/screenshots/asteroid_shooter_1.png?raw=true</image>
+      <image>https://github.com/denzilferreira/asteroid_shooter/blob/v1.0.0/screenshots/asteroid_shooter_1.png?raw=true</image>
     </screenshot>
     <screenshot>
-      <image>https://github.com/denzilferreira/asteroid_shooter/blob/a5921634c456b4fef8b754e252efd30fc38ac4bf/screenshots/asteroid_shooter_2.png?raw=true</image>
+      <image>https://github.com/denzilferreira/asteroid_shooter/blob/v1.0.0/screenshots/asteroid_shooter_2.png?raw=true</image>
     </screenshot>
   </screenshots>
   <releases>
-    <release version="1.0.0" date="2025-06-23">
+    <release version="1.0.0" date="2025-06-24">
       <url type="details">https://github.com/denzilferreira/asteroid_shooter/releases/tag/v1.0.0</url>
       <description>
         <p>Release description</p>
