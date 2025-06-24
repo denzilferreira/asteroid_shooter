@@ -12,6 +12,9 @@
   <project_license>Apache-2.0</project_license>
   <content_rating type="oars-1.1" />
 
+  <icon type="stock">io.github.denzilferreira.asteroid_shooter</icon>
+  <icon type="remote" height="256" width="256">https://github.com/denzilferreira/asteroid_shooter/blob/b06956f593e73777231b0e959ccbc8f1cd1b57cd/launcher/io.github.denzilferreira.asteroid_shooter.png</icon>
+  
   <url type="homepage">https://denzilferreira.com/</url>
   <url type="bugtracker">https://github.com/denzilferreira/asteroid_shooter/issues</url>
   <url type="vcs-browser">https://github.com/denzilferreira/asteroid_shooter</url>
@@ -25,7 +28,11 @@
       A local 2-player spaceship asteroid survival game. The game round lasts 120 seconds. The top shooter wins. Easy keeps your power-ups when hit by an asteroid. Gamepads are supported.
     </p>
   </description>
-  
+
+  <categories>
+    <category>Games</category>
+  </categories>
+
   <launchable type="desktop-id">io.github.denzilferreira.android_shooter.desktop</launchable>
   <screenshots>
     <screenshot type="default">
