@@ -30,20 +30,22 @@
   </description>
 
   <categories>
-    <category>Games</category>
+    <category>game</category>
   </categories>
 
   <launchable type="desktop-id">io.github.denzilferreira.android_shooter.desktop</launchable>
   <screenshots>
     <screenshot type="default">
       <image>https://github.com/denzilferreira/asteroid_shooter/blob/v1.0.0/screenshots/asteroid_shooter_1.png?raw=true</image>
+      <caption>Asteroid Shooter instructions</caption>
     </screenshot>
     <screenshot>
       <image>https://github.com/denzilferreira/asteroid_shooter/blob/v1.0.0/screenshots/asteroid_shooter_2.png?raw=true</image>
+      <caption>Asteroid Shooter gameplay</caption>
     </screenshot>
   </screenshots>
   <releases>
-    <release version="1.0.0" date="2025-06-24">
+    <release version="1.0.0" date="2025-06-26">
       <url type="details">https://github.com/denzilferreira/asteroid_shooter/releases/tag/v1.0.0</url>
       <description>
         <p>Release description</p>
