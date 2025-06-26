@@ -30,7 +30,7 @@
   </description>
 
   <categories>
-    <category>game</category>
+    <category>Game</category>
   </categories>
 
   <launchable type="desktop-id">io.github.denzilferreira.asteroid_shooter.desktop</launchable>
