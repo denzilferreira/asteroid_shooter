@@ -32,7 +32,7 @@
       "name": "asteroid-shooter",
       "buildsystem": "simple",
       "build-commands": [
-        "bash ./build.sh --prefix=${FLATPAK_DEST}"
+        "bash ./build.sh"
       ],
       "sources": [
         {

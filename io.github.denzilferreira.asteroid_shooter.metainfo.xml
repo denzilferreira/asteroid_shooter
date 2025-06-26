@@ -33,7 +33,7 @@
     <category>game</category>
   </categories>
 
-  <launchable type="desktop-id">io.github.denzilferreira.android_shooter.desktop</launchable>
+  <launchable type="desktop-id">io.github.denzilferreira.asteroid_shooter.desktop</launchable>
   <screenshots>
     <screenshot type="default">
       <image>https://github.com/denzilferreira/asteroid_shooter/blob/v1.0.0/screenshots/asteroid_shooter_1.png?raw=true</image>
