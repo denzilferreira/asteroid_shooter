@@ -6,19 +6,13 @@ A quick, vibe-coded Python arcade game built with Pygame. Created in just 20 min
 - v2: gamepad+rumble support, powerup sound effect, starfield background, replay, difficulty level picking
 - v1: initial release
 
-## Preview
-#v3
+## Demo
 [![YouTube](https://img.youtube.com/vi/qAgukJtbTuo/hqdefault.jpg)](https://youtu.be/qAgukJtbTuo)
 
-#v2
-![v2](demo/demo-v2.gif)
 
-Initial release
-![v1](demo/demo.gif)
-
-## Running the Game
-
-To run the game, use the provided `run.sh` script. This script will set up the environment and start the game automatically.
+## Running the Game directly
+- Checkout this project locally
+- Use the provided `run.sh` script. This script will set up the environment and start the game automatically.
 
 ### Instructions
 
