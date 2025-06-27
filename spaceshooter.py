@@ -1,6 +1,7 @@
 import pygame
 import random
 import sys
+import os
 
 # --- Constants ---
 SCREEN_WIDTH = 800
@@ -359,22 +360,23 @@ for pad in gamepads:
     pad.init()
 
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+current_folder = os.path.dirname(os.path.abspath(__file__))
 pygame.display.set_caption("Asteroid Shooter")
 clock = pygame.time.Clock()
 
-pygame.mixer.music.load("space_shooter_loop.wav")
+pygame.mixer.music.load(os.path.join(current_folder, "space_shooter_loop.wav"))
 pygame.mixer.music.set_volume(0.2)
 pygame.mixer.music.play(-1)
 
 # Load assets
-player1_img = load_image("player1.png", 40, 35, crop_rect=(256, 256, 640, 640))
-player2_img = load_image("player2.png", 40, 35, crop_rect=(256, 256, 640, 640))
-asteroid_img = load_image("asteroid.png", 40, 40)
+player1_img = load_image(os.path.join(current_folder, "player1.png"), 40, 35, crop_rect=(256, 256, 640, 640))
+player2_img = load_image(os.path.join(current_folder, "player2.png"), 40, 35, crop_rect=(256, 256, 640, 640))
+asteroid_img = load_image(os.path.join(current_folder, "asteroid.png"), 40, 40)
 
 # Load sounds
-laser_sound = pygame.mixer.Sound("laser.wav")
-explosion_sound = pygame.mixer.Sound("explosion.wav")
-powerup_sound = pygame.mixer.Sound("powerup.wav")
+laser_sound = pygame.mixer.Sound(os.path.join(current_folder, "laser.wav"))
+explosion_sound = pygame.mixer.Sound(os.path.join(current_folder, "explosion.wav"))
+powerup_sound = pygame.mixer.Sound(os.path.join(current_folder, "powerup.wav"))
 
 # Create sprite groups
 all_sprites = pygame.sprite.Group()
