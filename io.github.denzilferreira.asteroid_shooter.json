@@ -5,11 +5,10 @@
   "sdk": "org.freedesktop.Sdk",
   "command": "asteroid-shooter",
   "finish-args": [
-    "--share=network",
     "--socket=fallback-x11",
     "--socket=wayland",
     "--device=dri",
-    "--device=all",
+    "--device=input",
     "--socket=pulseaudio",
     "--share=ipc"
   ],

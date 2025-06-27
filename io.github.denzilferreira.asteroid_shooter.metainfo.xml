@@ -25,7 +25,9 @@
   
   <description>
     <p>
-      A local 2-player spaceship asteroid survival game. The game round lasts 120 seconds. The top shooter wins. Easy keeps your power-ups when hit by an asteroid. Gamepads are supported.
+      A local 2-player spaceship asteroid survival game. Each game round lasts 120 seconds. 
+      The top shooter wins. Easy-mode keeps your power-ups when hit by an asteroid. 
+      Gamepads are supported, but same keyboard playing is more fun!
     </p>
   </description>
 
