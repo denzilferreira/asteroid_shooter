@@ -1,3 +1,5 @@
+#!/usr/bin/env -S python3 -P
+
 import pygame
 import random
 import sys
@@ -360,7 +362,8 @@ for pad in gamepads:
     pad.init()
 
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
-current_folder = os.path.dirname(os.path.abspath(__file__))
+
+current_folder = os.path.abspath(os.path.dirname(__file__))
 pygame.display.set_caption("Asteroid Shooter")
 clock = pygame.time.Clock()
 

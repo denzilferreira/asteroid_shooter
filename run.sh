@@ -13,4 +13,4 @@ pip install --upgrade pip
 pip install -r requirements.txt
 
 # Launch the game
-python3 spaceshooter.py
+python3 spaceshooter/spaceshooter.py
