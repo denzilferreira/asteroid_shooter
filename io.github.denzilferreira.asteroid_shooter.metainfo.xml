@@ -3,7 +3,7 @@
   <id>io.github.denzilferreira.asteroid_shooter</id>
   
   <name>Asteroid Shooter</name>
-  <summary>A 2-player time-bound survival asteroid shooter.</summary>
+  <summary>Co-op space survival</summary>
   <developer id="com.denzilferreira">
     <name>Denzil Ferreira</name>
   </developer>
@@ -35,6 +35,11 @@
     <category>Game</category>
   </categories>
 
+  <branding>
+    <color type="primary" scheme_preference="light">#F2994A</color>
+    <color type="primary" scheme_preference="dark">#E66100</color>
+  </branding>
+
   <launchable type="desktop-id">io.github.denzilferreira.asteroid_shooter.desktop</launchable>
   <screenshots>
     <screenshot type="default">
@@ -47,6 +52,16 @@
     </screenshot>
   </screenshots>
   <releases>
+    <release version="1.0.1" date="2025-07-02">
+      <description>
+        <p>Release description</p>
+          <ul>
+            <li>Fix resetting player scores and power-ups after each round</li>
+            <li>Fix missing down key instructions on start screen</li>
+            <li>Fix missing metadata info for Software Center</li>
+          </ul>
+      </description>
+    </release>
     <release version="1.0.0" date="2025-06-26">
       <description>
         <p>Release description</p>

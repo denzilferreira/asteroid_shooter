@@ -262,8 +262,8 @@ def show_start_screen():
     """Displays the initial screen with instructions."""
     screen.fill(BLACK)
     draw_text(screen, "ASTEROID SHOOTER", 64, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 4, WHITE)
-    draw_text(screen, "Player 1: W (Up), A (Left), D (Right), F (Shoot)", 22, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 - 60, WHITE)
-    draw_text(screen, "Player 2: Arrow Keys (Up, Left, Right), Right Shift (Shoot)", 22, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 - 20, WHITE)
+    draw_text(screen, "Player 1: W (Up), S (Down), A (Left), D (Right), F (Shoot)", 22, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 - 60, WHITE)
+    draw_text(screen, "Player 2: Arrow Keys (Up, Down, Left, Right), Right Shift (Shoot)", 22, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 - 20, WHITE)
     draw_text(screen, "Collect Power-Ups to shoot more lasers!", 22, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 + 20, WHITE)
     draw_text(screen, "Avoid Asteroids or you'll lose your lasers!", 22, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 + 60, WHITE)
     draw_text(screen, "The player with the most asteroids destroyed wins!", 22, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 + 100, WHITE)
@@ -345,12 +345,16 @@ def reset_game():
     # Recreate players
     player1.reset()
     player2.reset()
+    player1.score = 0
+    player2.score = 0
     all_sprites.add(player1, player2)
     players.add(player1, player2)
 
     # Spawn asteroids based on difficulty
     for _ in range(num_asteroids):
         spawn_asteroid()
+    # Ensure no powerups remain
+    powerups.empty()
 
 # --- Initialization ---
 pygame.init()
