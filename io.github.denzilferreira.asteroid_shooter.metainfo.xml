@@ -25,8 +25,9 @@
   
   <description>
     <p>
-      A local 2-player spaceship asteroid survival game. Each game round lasts 120 seconds. 
-      The top shooter wins. Easy-mode keeps your power-ups when hit by an asteroid. 
+      Have fun playing Asteroid Shooter together with your friends! 
+      This is a simple yet addictive asteroid survival game. Each game round lasts 120 seconds. 
+      The top asteroid shooter wins. Easy-mode keeps your power-ups when hit by an asteroid. 
       Gamepads are supported, but same keyboard playing is more fun!
     </p>
   </description>
@@ -52,6 +53,14 @@
     </screenshot>
   </screenshots>
   <releases>
+    <release version="1.0.3" date="2025-07-07">
+      <description>
+        <p>Release description</p>
+          <ul>
+            <li>Improve explosions rendering</li>
+          </ul>
+      </description>
+    </release>
     <release version="1.0.2" date="2025-07-06">
       <description>
         <p>Release description</p>

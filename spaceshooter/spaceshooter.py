@@ -17,6 +17,7 @@ WHITE = (255, 255, 255)
 GREEN = (0, 255, 0)
 RED = (255, 0, 0)
 ORANGE = (255, 165, 0)
+YELLOW = (255, 255, 0)
 
 # Player settings
 PLAYER_ACCELERATION = 0.4
@@ -212,6 +213,7 @@ class Explosion(pygame.sprite.Sprite):
         self.rect = self.image.get_rect(center=center)
         self.spawn_time = pygame.time.get_ticks()
         self.duration = 250  # milliseconds
+        self.colors = [ORANGE, RED, YELLOW]
 
     def update(self):
         now = pygame.time.get_ticks()
@@ -221,11 +223,14 @@ class Explosion(pygame.sprite.Sprite):
             return
 
         progress = elapsed / self.duration
-        radius = int((self.size // 12) + progress * (self.size // 2))  # Scales with size
         alpha = 255 - int(progress * 255)
+        self.image.fill((0, 0, 0, 0))  # Clear previous frame
 
-        self.image.fill((0, 0, 0, 0))
-        pygame.draw.circle(self.image, (*ORANGE, alpha), (self.size // 2, self.size // 2), radius)
+        for i, color in enumerate(self.colors):    
+            selected_color = random.choice(self.colors)
+            radius = int((self.size // 12) + progress * (self.size // 2))
+            pygame.draw.circle(self.image, (*selected_color, alpha),
+                               (self.size // 2, self.size // 2), radius - (radius // 5 * i))
 
 class PowerUp(pygame.sprite.Sprite):
     def __init__(self):
