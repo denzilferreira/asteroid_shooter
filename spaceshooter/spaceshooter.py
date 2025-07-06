@@ -347,14 +347,14 @@ def reset_game():
     player2.reset()
     player1.score = 0
     player2.score = 0
+    player1.laser_count = 1
+    player2.laser_count = 1
     all_sprites.add(player1, player2)
     players.add(player1, player2)
 
     # Spawn asteroids based on difficulty
     for _ in range(num_asteroids):
         spawn_asteroid()
-    # Ensure no powerups remain
-    powerups.empty()
 
 # --- Initialization ---
 pygame.init()
@@ -365,7 +365,7 @@ gamepads = [pygame.joystick.Joystick(i) for i in range(pygame.joystick.get_count
 for pad in gamepads:
     pad.init()
 
-screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT), pygame.SCALED | pygame.SHOWN)
 
 current_folder = os.path.abspath(os.path.dirname(__file__))
 pygame.display.set_caption("Asteroid Shooter")
