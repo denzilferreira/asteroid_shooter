@@ -52,6 +52,15 @@
     </screenshot>
   </screenshots>
   <releases>
+    <release version="1.0.2" date="2025-07-06">
+      <description>
+        <p>Release description</p>
+          <ul>
+            <li>Fix reset player lasers after each round</li>
+            <li>Update gameplay screenshot</li>
+          </ul>
+      </description>
+    </release>
     <release version="1.0.1" date="2025-07-02">
       <description>
         <p>Release description</p>
