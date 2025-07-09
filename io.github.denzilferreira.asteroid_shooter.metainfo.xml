@@ -53,11 +53,12 @@
     </screenshot>
   </screenshots>
   <releases>
-    <release version="1.0.3" date="2025-07-07">
+    <release version="1.0.3" date="2025-07-09">
       <description>
         <p>Release description</p>
           <ul>
             <li>Improve explosions rendering</li>
+            <li>Flatpak metadata compliance</li>
           </ul>
       </description>
     </release>

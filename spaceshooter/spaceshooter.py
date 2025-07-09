@@ -370,7 +370,7 @@ gamepads = [pygame.joystick.Joystick(i) for i in range(pygame.joystick.get_count
 for pad in gamepads:
     pad.init()
 
-screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT), pygame.SCALED | pygame.SHOWN)
+screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT), pygame.SHOWN)
 
 current_folder = os.path.abspath(os.path.dirname(__file__))
 pygame.display.set_caption("Asteroid Shooter")
